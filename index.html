@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gunung Andong — Perjalanan Basecamp 1 hingga Puncak</title>
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --hijau:    #2D6A4F;
+      --hijau-muda: #52B788;
+      --cokelat:  #8B5E3C;
+      --krem:     #F4F1E8;
+      --krem-gelap: #E8E3D0;
+      --putih:    #FFFFFF;
+      --teks:     #2C2C2C;
+      --abu:      #6B6B6B;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Georgia', serif;
+      background-color: var(--krem);
+      color: var(--teks);
+      line-height: 1.7;
+    }
+
+    /* ===== NAVBAR ===== */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(45, 106, 79, 0.95);
+      backdrop-filter: blur(8px);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-logo {
+      color: var(--krem);
+      font-size: 1.1rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--krem);
+      text-decoration: none;
+      font-size: 0.9rem;
+      opacity: 0.85;
+      transition: opacity 0.2s;
+    }
+
+    .nav-links a:hover { opacity: 1; }
+
+    /* ===== HERO ===== */
+    .hero {
+      min-height: 100vh;
+      background:
+        linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, rgba(45,106,79,0.6) 100%),
+        url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1400&q=80') center/cover no-repeat;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: var(--hijau-muda);
+      color: var(--putih);
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 0.4rem 1.2rem;
+      border-radius: 100px;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+      color: var(--putih);
+      font-size: clamp(2.2rem, 6vw, 4rem);
+      line-height: 1.2;
+      max-width: 700px;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      color: rgba(255,255,255,0.88);
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      max-width: 520px;
+      margin-bottom: 2.5rem;
+      font-style: italic;
+    }
+
+    .btn {
+      display: inline-block;
+      background: var(--hijau-muda);
+      color: var(--putih);
+      text-decoration: none;
+      padding: 0.85rem 2.2rem;
+      border-radius: 100px;
+      font-size: 1rem;
+      font-family: sans-serif;
+      font-weight: 600;
+      transition: background 0.25s, transform 0.15s;
+    }
+
+    .btn:hover {
+      background: var(--hijau);
+      transform: translateY(-2px);
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255,255,255,0.6);
+      font-family: sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      animation: bounce 2s infinite;
+    }
+
+    .hero-scroll::after {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 40px;
+      background: rgba(255,255,255,0.4);
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* ===== SECTION UMUM ===== */
+    section { padding: 5rem 1.5rem; }
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--hijau-muda);
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      color: var(--hijau);
+      margin-bottom: 1rem;
+    }
+
+    .section-sub {
+      color: var(--abu);
+      font-size: 1rem;
+      max-width: 560px;
+      margin-bottom: 3rem;
+    }
+
+    /* ===== RINGKASAN / STAT BAR ===== */
+    .stat-bar {
+      background: var(--hijau);
+      padding: 2.5rem 1.5rem;
+    }
+
+    .stat-bar .container {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      text-align: center;
+    }
+
+    .stat-item { color: var(--krem); }
+
+    .stat-num {
+      font-size: 2rem;
+      font-weight: bold;
+      display: block;
+    }
+
+    .stat-desc {
+      font-family: sans-serif;
+      font-size: 0.8rem;
+      opacity: 0.75;
+      letter-spacing: 1px;
+    }
+
+    /* ===== BASECAMP TIMELINE ===== */
+    .timeline {
+      position: relative;
+      padding-left: 0;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 28px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--hijau-muda), var(--hijau));
+    }
+
+    .bc-card {
+      position: relative;
+      background: var(--putih);
+      border-radius: 16px;
+      padding: 2rem 2rem 2rem 5rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .bc-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 32px rgba(45,106,79,0.12);
+    }
+
+    .bc-dot {
+      position: absolute;
+      left: 16px;
+      top: 2.2rem;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--hijau);
+      border: 3px solid var(--krem);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--putih);
+      font-size: 0.65rem;
+      font-family: sans-serif;
+      font-weight: bold;
+    }
+
+    .bc-dot.puncak {
+      background: var(--cokelat);
+      width: 30px;
+      height: 30px;
+      left: 13px;
+    }
+
+    .bc-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .bc-name {
+      font-size: 1.3rem;
+      color: var(--hijau);
+    }
+
+    .bc-meta {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      display: inline-block;
+      background: var(--krem-gelap);
+      color: var(--cokelat);
+      font-family: sans-serif;
+      font-size: 0.75rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: 100px;
+      font-weight: 600;
+    }
+
+    .tag.waktu { background: #EDF6F0; color: var(--hijau); }
+
+    .bc-story {
+      font-style: italic;
+      color: var(--abu);
+      margin: 0.75rem 0;
+      font-size: 0.975rem;
+    }
+
+    .bc-info {
+      font-family: sans-serif;
+      font-size: 0.85rem;
+      color: var(--teks);
+      border-top: 1px solid var(--krem-gelap);
+      padding-top: 0.75rem;
+      margin-top: 0.75rem;
+    }
+
+    .bc-info span {
+      display: inline-block;
+      margin-right: 1rem;
+      color: var(--abu);
+    }
+
+    .bc-info span::before {
+      content: '✓ ';
+      color: var(--hijau-muda);
+    }
+
+    /* ===== TIPS ===== */
+    .tips-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .tip-card {
+      background: var(--putih);
+      border-radius: 12px;
+      padding: 1.5rem;
+      border-left: 4px solid var(--hijau-muda);
+    }
+
+    .tip-icon {
+      font-size: 1.75rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .tip-card h3 {
+      font-size: 1rem;
+      color: var(--hijau);
+      margin-bottom: 0.4rem;
+    }
+
+    .tip-card p {
+      font-family: sans-serif;
+      font-size: 0.85rem;
+      color: var(--abu);
+    }
+
+    /* ===== TABEL RINGKASAN ===== */
+    .tabel-wrap {
+      overflow-x: auto;
+      border-radius: 12px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--putih);
+      font-family: sans-serif;
+      font-size: 0.9rem;
+    }
+
+    thead tr { background: var(--hijau); color: var(--krem); }
+
+    thead th {
+      padding: 1rem;
+      text-align: left;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    tbody tr:nth-child(even) { background: var(--krem); }
+    tbody tr:last-child { background: #EDF6F0; font-weight: bold; }
+
+    tbody td {
+      padding: 0.85rem 1rem;
+      color: var(--teks);
+      border-bottom: 1px solid var(--krem-gelap);
+    }
+
+    /* ===== CTA ===== */
+    .cta-section {
+      background:
+        linear-gradient(135deg, rgba(45,106,79,0.9), rgba(139,94,60,0.85)),
+        url('https://images.unsplash.com/photo-1501854140801-50d01698950b?w=1200&q=80') center/cover no-repeat;
+      text-align: center;
+      padding: 6rem 1.5rem;
+    }
+
+    .cta-section h2 {
+      color: var(--putih);
+      font-size: clamp(1.75rem, 4vw, 2.8rem);
+      max-width: 620px;
+      margin: 0 auto 1rem;
+      line-height: 1.3;
+    }
+
+    .cta-section p {
+      color: rgba(255,255,255,0.8);
+      font-style: italic;
+      max-width: 480px;
+      margin: 0 auto 2.5rem;
+      font-size: 1.05rem;
+    }
+
+    .btn-outline {
+      display: inline-block;
+      border: 2px solid var(--krem);
+      color: var(--krem);
+      text-decoration: none;
+      padding: 0.75rem 2rem;
+      border-radius: 100px;
+      font-family: sans-serif;
+      font-size: 0.95rem;
+      margin-left: 1rem;
+      transition: background 0.25s, color 0.25s;
+    }
+
+    .btn-outline:hover {
+      background: var(--krem);
+      color: var(--hijau);
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--teks);
+      color: rgba(255,255,255,0.55);
+      text-align: center;
+      padding: 2rem;
+      font-family: sans-serif;
+      font-size: 0.82rem;
+    }
+
+    footer strong { color: rgba(255,255,255,0.85); }
+
+    /* ===== FADE-IN ANIMASI ===== */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .timeline::before { left: 20px; }
+      .bc-card { padding: 1.5rem 1.25rem 1.5rem 4rem; }
+      .bc-dot { left: 8px; }
+      .bc-dot.puncak { left: 5px; }
+      .btn-outline { margin-left: 0; margin-top: 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <div class="nav-logo">⛰ Gunung Andong</div>
+    <ul class="nav-links">
+      <li><a href="#perjalanan">Perjalanan</a></li>
+      <li><a href="#tips">Tips</a></li>
+      <li><a href="#ringkasan">Ringkasan</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <span class="hero-badge">Gunung Andong · Jawa Tengah · 1.726 mdpl</span>
+    <h1>Setiap Langkah Menuju Puncak Adalah Cerita</h1>
+    <p>"Andong bukan tentang seberapa cepat kamu sampai puncak, tapi seberapa dalam kamu menikmati perjalanannya."</p>
+    <a href="#perjalanan" class="btn">Mulai Perjalanan</a>
+    <div class="hero-scroll">SCROLL</div>
+  </section>
+
+  <!-- STAT BAR -->
+  <div class="stat-bar">
+    <div class="container">
+      <div class="stat-item">
+        <span class="stat-num">1.726</span>
+        <span class="stat-desc">Meter di atas laut</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">5</span>
+        <span class="stat-desc">Basecamp</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">~2 Jam</span>
+        <span class="stat-desc">Estimasi naik</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">Mudah</span>
+        <span class="stat-desc">Cocok untuk pemula</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PERJALANAN / TIMELINE -->
+  <section id="perjalanan" style="background: var(--krem);">
+    <div class="container">
+      <p class="section-label">Perjalanan</p>
+      <h2 class="section-title">Dari Desa Sawit Hingga Puncak</h2>
+      <p class="section-sub">Ikuti alur perjalanan melewati 5 pos pendakian — dari ujung desa hingga atap Magelang.</p>
+
+      <div class="timeline">
+
+        <!-- BC 1 -->
+        <div class="bc-card fade-in">
+          <div class="bc-dot">1</div>
+          <div class="bc-header">
+            <h3 class="bc-name">Basecamp 1 — Desa Sawit</h3>
+            <div class="bc-meta">
+              <span class="tag">± 560 mdpl</span>
+              <span class="tag waktu">Start</span>
+            </div>
+          </div>
+          <p class="bc-story">
+            Di sinilah petualangan dimulai. Udara pagi yang segar menyambut sebelum kaki
+            melangkah ke jalur bebatuan pertama. Suara ayam dan aroma dapur warga
+            menemanimu mempersiapkan langkah pertama.
+          </p>
+          <div class="bc-info">
+            <span>Titik registrasi</span>
+            <span>Toilet tersedia</span>
+            <span>Parkir aman</span>
+            <span>Warung makan</span>
+          </div>
+        </div>
+
+        <!-- BC 2 -->
+        <div class="bc-card fade-in">
+          <div class="bc-dot">2</div>
+          <div class="bc-header">
+            <h3 class="bc-name">Basecamp 2 — Pos Pendaftaran</h3>
+            <div class="bc-meta">
+              <span class="tag">± 700 mdpl</span>
+              <span class="tag waktu">+15–20 menit</span>
+            </div>
+          </div>
+          <p class="bc-story">
+            Kamu resmi masuk kawasan pendakian. Hutan pinus mulai menyambut dan suara
+            keramaian kota menghilang perlahan. Gerbang kayu bertuliskan "Selamat Mendaki"
+            terasa seperti awal dari sesuatu yang istimewa.
+          </p>
+          <div class="bc-info">
+            <span>Wajib lapor petugas</span>
+            <span>Retribusi resmi</span>
+            <span>Cek perlengkapan</span>
+          </div>
+        </div>
+
+        <!-- BC 3 -->
+        <div class="bc-card fade-in">
+          <div class="bc-dot">3</div>
+          <div class="bc-header">
+            <h3 class="bc-name">Basecamp 3 — Pos Tengah</h3>
+            <div class="bc-meta">
+              <span class="tag">± 900 mdpl</span>
+              <span class="tag waktu">+30–45 menit</span>
+            </div>
+          </div>
+          <p class="bc-story">
+            Setengah perjalanan. Di sini banyak pendaki berhenti sejenak, mengisi air minum,
+            dan mengatur napas. Pemandangan lembah hijau mulai terlihat dari sela-sela pohon —
+            sebuah pengingat bahwa kamu sudah jauh melangkah.
+          </p>
+          <div class="bc-info">
+            <span>Sumber air terdekat</span>
+            <span>Area istirahat</span>
+            <span>Spot foto lembah</span>
+          </div>
+        </div>
+
+        <!-- BC 4 -->
+        <div class="bc-card fade-in">
+          <div class="bc-dot">4</div>
+          <div class="bc-header">
+            <h3 class="bc-name">Basecamp 4 — Sabana</h3>
+            <div class="bc-meta">
+              <span class="tag">± 1.100 mdpl</span>
+              <span class="tag waktu">+20–30 menit</span>
+            </div>
+          </div>
+          <p class="bc-story">
+            Jalur menyempit dan mulai menanjak tajam. Tapi begitu keluar dari rimbunnya hutan,
+            hamparan sabana hijau dan angin sejuk menyambutmu. Semua rasa lelah terbayar
+            seketika oleh panorama 180 derajat yang memukau.
+          </p>
+          <div class="bc-info">
+            <span>Angin cukup kencang</span>
+            <span>Siapkan jaket</span>
+            <span>Spot foto terbaik</span>
+          </div>
+        </div>
+
+        <!-- BC 5 / PUNCAK -->
+        <div class="bc-card fade-in">
+          <div class="bc-dot puncak">⛰</div>
+          <div class="bc-header">
+            <h3 class="bc-name">Basecamp 5 — Puncak Andong</h3>
+            <div class="bc-meta">
+              <span class="tag" style="background:#FFF3E0;color:#8B5E3C;">1.726 mdpl</span>
+              <span class="tag waktu">+20–30 menit</span>
+            </div>
+          </div>
+          <p class="bc-story">
+            Puncak! Dari sini kamu bisa melihat Gunung Merbabu, Merapi, Sumbing, dan Sindoro
+            sekaligus — empat raksasa dalam satu pandangan. Inilah hadiah untuk setiap langkah
+            yang tidak menyerah. Ada tiga puncak kecil: Makam, Jiwa, dan Andong.
+          </p>
+          <div class="bc-info">
+            <span>Sunrise 05.30–06.00 WIB</span>
+            <span>View Merapi & Merbabu</span>
+            <span>Area camping tersedia</span>
+            <span>Bawa sleeping bag</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- TIPS -->
+  <section id="tips" style="background: var(--krem-gelap);">
+    <div class="container">
+      <p class="section-label">Persiapan</p>
+      <h2 class="section-title">Tips untuk Pendaki Pemula</h2>
+      <p class="section-sub">Andong ramah untuk pemula, tapi persiapan yang baik tetap membuat perjalananmu lebih menyenangkan.</p>
+
+      <div class="tips-grid">
+        <div class="tip-card fade-in">
+          <div class="tip-icon">🌅</div>
+          <h3>Mulai Pagi</h3>
+          <p>Berangkat sebelum pukul 07.00 agar sampai puncak saat cahaya pagi masih indah dan udara sejuk.</p>
+        </div>
+        <div class="tip-card fade-in">
+          <div class="tip-icon">💧</div>
+          <h3>Cukupi Air</h3>
+          <p>Bawa minimal 1,5 liter air per orang. Sumber air tersedia di Pos 3, tapi jangan andalkan itu saja.</p>
+        </div>
+        <div class="tip-card fade-in">
+          <div class="tip-icon">👟</div>
+          <h3>Alas Kaki Tepat</h3>
+          <p>Gunakan sepatu hiking atau sneakers bersol karet. Hindari sandal karena jalur bisa licin saat basah.</p>
+        </div>
+        <div class="tip-card fade-in">
+          <div class="tip-icon">🧥</div>
+          <h3>Siapkan Jaket</h3>
+          <p>Di sabana dan puncak angin cukup kencang. Bawa jaket windbreaker meski cuaca cerah di bawah.</p>
+        </div>
+        <div class="tip-card fade-in">
+          <div class="tip-icon">🗑</div>
+          <h3>Bawa Sampahmu</h3>
+          <p>Tidak ada tempat sampah di jalur. Bawa kantong untuk menyimpan sampahmu hingga kembali ke bawah.</p>
+        </div>
+        <div class="tip-card fade-in">
+          <div class="tip-icon">📱</div>
+          <h3>Charge Penuh</h3>
+          <p>Pastikan HP penuh sebelum naik. Tidak ada colokan di jalur. Powerbank sangat disarankan.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RINGKASAN TABEL -->
+  <section id="ringkasan" style="background: var(--krem);">
+    <div class="container">
+      <p class="section-label">Ringkasan</p>
+      <h2 class="section-title">Data Lengkap Jalur Pendakian</h2>
+      <p class="section-sub">Estimasi waktu untuk pendaki pemula dengan kecepatan santai.</p>
+
+      <div class="tabel-wrap fade-in">
+        <table>
+          <thead>
+            <tr>
+              <th>Pos</th>
+              <th>Nama</th>
+              <th>Ketinggian</th>
+              <th>Waktu Tempuh</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>BC 1</td>
+              <td>Desa Sawit</td>
+              <td>± 560 mdpl</td>
+              <td>Start / Titik awal</td>
+            </tr>
+            <tr>
+              <td>BC 2</td>
+              <td>Pos Pendaftaran</td>
+              <td>± 700 mdpl</td>
+              <td>+15–20 menit</td>
+            </tr>
+            <tr>
+              <td>BC 3</td>
+              <td>Pos Tengah</td>
+              <td>± 900 mdpl</td>
+              <td>+30–45 menit</td>
+            </tr>
+            <tr>
+              <td>BC 4</td>
+              <td>Sabana</td>
+              <td>± 1.100 mdpl</td>
+              <td>+20–30 menit</td>
+            </tr>
+            <tr>
+              <td>BC 5</td>
+              <td>Puncak Andong</td>
+              <td>1.726 mdpl</td>
+              <td>+20–30 menit</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p style="margin-top:1.5rem; font-family:sans-serif; font-size:0.85rem; color:var(--abu);">
+        * Total estimasi naik: <strong>1,5 – 2 jam</strong> untuk pemula · Tingkat kesulitan: <strong>Mudah–Sedang</strong>
+      </p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <h2>Siap Menapaki Andong?</h2>
+    <p>"Gunung Andong bukan hanya soal puncak. Ia soal perjalanan, keberanian, dan ketenangan yang kamu temukan di setiap langkahnya."</p>
+    <a href="#perjalanan" class="btn">Lihat Jalur Lagi</a>
+    <a href="#tips" class="btn-outline">Tips Pendakian</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Dibuat dengan <strong>semangat pendaki</strong> · Gunung Andong, Magelang, Jawa Tengah</p>
+    <p style="margin-top:0.5rem; font-size:0.75rem;">Informasi bersifat umum — selalu cek kondisi jalur terkini sebelum mendaki</p>
+  </footer>
+
+  <!-- SCROLL ANIMATION -->
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
